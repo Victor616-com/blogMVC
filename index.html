@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Blog Posts</h1>
+        <div id="posts"></div>
+        <input type="text" id="new-post-title" placeholder="Post Title">
+        <textarea id="new-post-content" placeholder="Post Content"></textarea>
+        <button id="add-post">Add Post</button>
+    </div>
+    <div id="editor">     
+        <div class="overlay">
+            <div class="editor-body">
+                <div class="editor-title">
+                    <input type="text" id="edit-post-title">
+                </div>
+                <div class="editor-content">
+                    <textarea id="edit-post-content" placeholder="Post Content"></textarea>
+                </div>
+                <button id="save-post">Save Post</button>
+            </div>
+        </div>      
+    </div>
+    <script type="module">
+        let postsFromStorage = JSON.parse(localStorage.getItem('posts'));
+        if (postsFromStorage == null) {
+            postsFromStorage = [];
+        }
+        import Model from "./model/model.js";
+        import View from "./view/view.js";
+        import Controller from "./controller/controller.js";
+
+        const app = new Controller (new Model(postsFromStorage), new View());
+    </script>
+</body>
+</html>
